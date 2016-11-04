@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<p>
+  <strong>Start Time:</strong>
+  <%= @event.startTime %>
+</p>
+
+<p>
+  <strong>End Time:</strong>
+  <%= @event.endTime %>
+</p>
+<h2> Posts </h2>
+<% @event.posts.each do |post| %>
+<tr>
+  <h4><%= post.title %> </h4>
+             <blockquote>
+               <%= image_tag post.image.url(:thumb) %>
+               <br><br>
+               <%= post.content %>
+
+             <p>
+               <br>
+               <%= link_to "Show", [@calendar,@event,post] %>
+             </p>
+
+             <p>
+               <%= link_to 'Destroy Post', [@calendar,@event,post],
+                            method: :delete, data: { confirm: 'Are you sure?' }  %>
+             </p>
+             </blockquote>
+            <br><br>
+    </tr>
+<% end %>
+
+<%= render 'posts/form' %>
+
+<br>
+<%= link_to 'Create Post', new_calendar_event_post_path(@calendar,@event,@post) %>
+<br>
+
+<br>
+<%= link_to 'Edit', edit_calendar_event_path(@calendar,@event) %> |
+<a href="javascript:history.back()">Back</a>
+<br>
+<p>
+  <%= link_to 'Destroy Event', [@calendar,@event],
+               method: :delete, data: { confirm: 'Are you sure?' }  %>
+</p>
